@@ -10,9 +10,6 @@ public class Main
 
         Policy randomPolicy = gridWorld.generateRandomPolicy();
 
-        for (Cell c: randomPolicy.getCells())
-        {
-            System.out.println(c);
-        }
+        System.out.println(randomPolicy.toString());
     }
 }

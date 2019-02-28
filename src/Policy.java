@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Policy
 {
@@ -19,20 +20,9 @@ public class Policy
     }
 
     @Override
-    /**
-     * TODO: Fix, make neatly
-     */
     public String toString()
     {
-//        String out = "";
-//        for(int i = 0; i < cells.size(); i++)
-//        {
-//            out += cells[i];
-//            if(i != cells.size()-1){
-//                out += " -> ";
-//            }
-//        }
-        return "";
+        return this.cells.stream().map(Cell::toString).collect(Collectors.joining(" -> "));
     }
 
     public void add(Cell cell)

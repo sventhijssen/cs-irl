@@ -53,21 +53,11 @@ public class GridWorld
 
         Cell neighbour;
 
-        if(row > 0)
-        {
-            neighbour = gridworld[row-1][column];
-            if(!policy.contains(neighbour))
-                neighbours.add(neighbour);
-        }
+        // We only add neighbours to the right or down below
+        // to avoid loops
         if(row < this.rows-1)
         {
             neighbour = gridworld[row+1][column];
-            if(!policy.contains(neighbour))
-                neighbours.add(neighbour);
-        }
-        if(column > 0)
-        {
-            neighbour = gridworld[row][column-1];
             if(!policy.contains(neighbour))
                 neighbours.add(neighbour);
         }
@@ -77,8 +67,6 @@ public class GridWorld
             if(!policy.contains(neighbour))
                 neighbours.add(neighbour);
         }
-
-        System.out.println(neighbours.size());
 
         Random rand = new Random();
         return neighbours.get(rand.nextInt(neighbours.size()));

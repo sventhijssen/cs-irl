@@ -25,7 +25,7 @@ public class Cell
     @Override
     public String toString()
     {
-        return "( " + this.row + ", " + this.column + " )";
+        return "(" + this.row + ", " + this.column + ")";
     }
 
     private int row;
