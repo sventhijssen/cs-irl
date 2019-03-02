@@ -1,6 +1,6 @@
 public enum CellType
 {
+    DEFAULT,
     PUDDLE,
-    GOAL,
-    DEFAULT
+    GOAL
 }

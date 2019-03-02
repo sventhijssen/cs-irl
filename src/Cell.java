@@ -7,6 +7,16 @@ public class Cell
         this.column = column;
     }
 
+    public Vector getFeatures()
+    {
+        if(this.type == CellType.DEFAULT)
+            return new Vector(new double[]{1, 0, 0});
+        else if(this.type == CellType.PUDDLE)
+            return new Vector(new double[]{0, 1, 0});
+        else
+            return new Vector(new double[]{0, 0, 1});
+    }
+
     public int getRow()
     {
         return row;
@@ -20,6 +30,11 @@ public class Cell
     public void setType(CellType type)
     {
         this.type = type;
+    }
+
+    public CellType getType()
+    {
+        return this.type;
     }
 
     @Override

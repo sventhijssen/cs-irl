@@ -10,6 +10,20 @@ public class Policy
 
     }
 
+    public Vector getFeatureExpectations(double discountFactor)
+    {
+        int i = 0;
+        Vector featureExpectations = new Vector(3);
+        for (Cell cell: this.cells)
+        {
+
+            Vector features = cell.getFeatures();
+            featureExpectations.plus(features.scale(Math.pow(discountFactor, i)));
+            i++;
+        }
+        return featureExpectations;
+    }
+
     public List<Cell> getCells()
     {
         return this.cells;
