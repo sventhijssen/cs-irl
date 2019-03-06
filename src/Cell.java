@@ -1,10 +1,37 @@
+import java.util.LinkedList;
+import java.util.List;
+
 public class Cell
 {
 
-    public Cell(int row, int column)
+    public Cell(int row, int column, GridWorld gridWorld)
     {
         this.row = row;
         this.column = column;
+        this.gridWorld = gridWorld;
+    }
+
+    public List<Transition> getTransitions()
+    {
+        List<Transition> neighbours = new LinkedList<>();
+
+        // We only add neighbours to the right or down below
+        // to avoid loops
+        if(row < gridWorld.getRows()-1)
+            neighbours.add(new Transition(gridWorld.getCell(row+1, column)));
+        if(row > 0)
+            neighbours.add(new Transition(gridWorld.getCell(row-1, column)));
+        if(column < gridWorld.getColumns()-1)
+            neighbours.add(new Transition(gridWorld.getCell(row, column+1)));
+        if(column > 0)
+            neighbours.add(new Transition(gridWorld.getCell(row, column-1)));
+
+        int n =neighbours.size();
+        for (Transition neighbour : neighbours)
+        {
+            neighbour.setProbability((double)1/n);
+        }
+        return neighbours;
     }
 
     public Vector getFeatures()
@@ -48,5 +75,5 @@ public class Cell
 
     private CellType type = CellType.DEFAULT;
 
-    private double reward = Math.random();
+    private GridWorld gridWorld;
 }

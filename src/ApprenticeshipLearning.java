@@ -41,6 +41,8 @@ class ApprenticeshipLearning
             if(t < threshold) break;
 
             // Step 4: Compute optimal policy pi_i for the MDP using rewards R = w^T.phi
+                PolicyIteration pit = new PolicyIteration(this.gridWorld, discountFactor, w);
+                randomPolicy = pit.getOptimalPolicy();
 
             // Step 5: Compute mu_i
 

@@ -13,7 +13,7 @@ public class GridWorld
         {
             for(int j = 0; j < columns; j++)
             {
-                gridworld[i][j] = new Cell(i, j);
+                gridworld[i][j] = new Cell(i, j, this);
             }
         }
     }
@@ -120,6 +120,21 @@ public class GridWorld
 
     private int rows;
     private int columns;
+
+    public int getRows()
+    {
+        return this.rows;
+    }
+
+    public int getColumns()
+    {
+        return columns;
+    }
+
+    public Cell getCell(int row, int column)
+    {
+        return gridworld[row][column];
+    }
 
     public Policy generateExpertPolicy()
     {
