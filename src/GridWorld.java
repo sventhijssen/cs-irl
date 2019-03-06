@@ -35,79 +35,15 @@ public class GridWorld
 
     public Policy generateRandomPolicy()
     {
-        Policy policy = new Policy();
-        Cell start = gridworld[0][0];
-        Cell goal = gridworld[this.rows-1][this.columns-1];
-
-        policy.add(start);
-
-        Cell next = this.getRandomNeighbour(start, policy);
-
-        policy.add(next);
-
-        while(next != goal)
+        Policy policy = new Policy(this);
+        for(int i = 0; i < rows; i++)
         {
-            next = this.getRandomNeighbour(next, policy);
-            policy.add(next);
+            for(int j = 0; j < columns; j++)
+            {
+                policy.addTransitions(i, j, Math.random(), Math.random(), Math.random(), Math.random());
+            }
         }
-
         return policy;
-    }
-
-    private Cell getRandomNeighbour(Cell cell, Policy policy)
-    {
-        int row = cell.getRow();
-        int column = cell.getColumn();
-
-        List<Cell> neighbours = new LinkedList<>();
-
-        Cell neighbour;
-
-        // We only add neighbours to the right or down below
-        // to avoid loops
-        if(row < this.rows-1)
-        {
-            neighbour = gridworld[row+1][column];
-            if(!policy.contains(neighbour))
-                neighbours.add(neighbour);
-        }
-        if(column < this.columns-1)
-        {
-            neighbour = gridworld[row][column+1];
-            if(!policy.contains(neighbour))
-                neighbours.add(neighbour);
-        }
-
-        Random rand = new Random();
-        return neighbours.get(rand.nextInt(neighbours.size()));
-    }
-
-    private Cell getOptimalNeighbour(Cell cell, Policy policy)
-    {
-        int row = cell.getRow();
-        int column = cell.getColumn();
-
-        List<Cell> neighbours = new LinkedList<>();
-
-        Cell neighbour;
-
-        // We only add neighbours to the right or down below
-        // to avoid loops
-        if(row < this.rows-1)
-        {
-            neighbour = gridworld[row+1][column];
-            if(!policy.contains(neighbour) && !neighbour.getType().equals(CellType.PUDDLE))
-                neighbours.add(neighbour);
-        }
-        if(column < this.columns-1)
-        {
-            neighbour = gridworld[row][column+1];
-            if(!policy.contains(neighbour) && !neighbour.getType().equals(CellType.PUDDLE))
-                neighbours.add(neighbour);
-        }
-
-        Random rand = new Random();
-        return neighbours.get(rand.nextInt(neighbours.size()));
     }
 
     @Override
@@ -134,26 +70,5 @@ public class GridWorld
     public Cell getCell(int row, int column)
     {
         return gridworld[row][column];
-    }
-
-    public Policy generateExpertPolicy()
-    {
-        Policy policy = new Policy();
-        Cell start = gridworld[0][0];
-        Cell goal = gridworld[this.rows-1][this.columns-1];
-
-        policy.add(start);
-
-        Cell next = this.getOptimalNeighbour(start, policy);
-
-        policy.add(next);
-
-        while(next != goal)
-        {
-            next = this.getOptimalNeighbour(next, policy);
-            policy.add(next);
-        }
-
-        return policy;
     }
 }

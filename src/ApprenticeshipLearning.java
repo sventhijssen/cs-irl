@@ -1,13 +1,13 @@
 class ApprenticeshipLearning
 {
-    ApprenticeshipLearning(GridWorld gridWorld)
+    ApprenticeshipLearning(GridWorld gridWorld, Policy expertPolicy)
     {
         this.gridWorld = gridWorld;
+        this.expertPolicy = expertPolicy;
     }
 
     Vector solve()
     {
-        Policy expertPolicy = gridWorld.generateExpertPolicy();
         Vector mu_expert = expertPolicy.getFeatureExpectations(discountFactor);
 
         // Step 1: Random policy
@@ -66,4 +66,6 @@ class ApprenticeshipLearning
     private double discountFactor = 0.9;
 
     private GridWorld gridWorld;
+
+    private Policy expertPolicy;
 }

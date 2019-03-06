@@ -11,6 +11,11 @@ public class Cell
         this.gridWorld = gridWorld;
     }
 
+    public void addTransition(Cell nextState, double probability)
+    {
+        this.transitions.add(new Transition(nextState, probability));
+    }
+
     public List<Transition> getTransitions()
     {
         List<Transition> neighbours = new LinkedList<>();
@@ -76,4 +81,6 @@ public class Cell
     private CellType type = CellType.DEFAULT;
 
     private GridWorld gridWorld;
+
+    private List<Transition> transitions;
 }
